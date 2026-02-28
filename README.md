@@ -79,6 +79,59 @@ Aplikasi ini dibuat untuk:
 - Mengimplementasikan konsep dasar pengembangan aplikasi mobile
 
 ---
+
+## 🧩 Penjelasan Widget yang Digunakan
+
+Berikut adalah beberapa widget utama yang digunakan dalam pengembangan aplikasi MyGoat:
+
+### 1️⃣ MaterialApp
+Digunakan sebagai root widget aplikasi yang menyediakan konfigurasi dasar seperti tema, title, dan routing.
+
+### 2️⃣ Scaffold
+Digunakan sebagai struktur dasar setiap halaman.  
+Menyediakan AppBar, body, dan FloatingActionButton.
+
+### 3️⃣ AppBar
+Menampilkan judul halaman serta tombol aksi (misalnya tombol monitoring pakan).
+
+### 4️⃣ Column & Row
+Digunakan untuk menyusun widget secara vertikal (Column) dan horizontal (Row).  
+Dipakai pada dashboard untuk menampilkan kartu statistik.
+
+### 5️⃣ Expanded
+Digunakan agar widget mengisi ruang yang tersedia secara proporsional, terutama pada ListView dan kartu statistik.
+
+### 6️⃣ ListView.builder
+Digunakan untuk menampilkan daftar data kambing dan riwayat berat secara dinamis berdasarkan jumlah data.
+
+### 7️⃣ ListTile
+Digunakan untuk menampilkan satu item data dalam bentuk baris yang berisi title, subtitle, dan ikon navigasi.
+
+### 8️⃣ FloatingActionButton
+Digunakan untuk menambahkan data baru (kambing atau pakan).
+
+### 9️⃣ TextFormField
+Digunakan dalam form input data kambing dengan validasi.
+
+### 🔟 DropdownButtonFormField
+Digunakan untuk memilih jenis kelamin dan jenis kambing.
+
+### 1️⃣1️⃣ showDatePicker
+Digunakan untuk memilih tanggal masuk kambing.
+
+### 1️⃣2️⃣ AlertDialog
+Digunakan untuk menambahkan data berat atau pakan melalui dialog pop-up.
+
+### 1️⃣3️⃣ Navigator
+Digunakan untuk berpindah antar halaman:
+- Navigator.push()
+- Navigator.pop()
+
+Digunakan untuk mengirim dan menerima data antar halaman.
+
+### 1️⃣4️⃣ setState()
+Digunakan untuk memperbarui tampilan ketika data berubah, seperti saat menambah kambing atau memperbarui berat.
+
 ## Dokumentasi
 
 <img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/01025d03-4d31-412f-9a23-d82f91395526" />
