@@ -140,6 +140,8 @@ Digunakan untuk memperbarui tampilan ketika data berubah, seperti saat menambah 
 
 <img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/835c265c-da0e-4e2a-8a30-9115014dda48" />
 
+<img width="1919" height="1075" alt="Screenshot 2026-02-28 234859" src="https://github.com/user-attachments/assets/baf2e509-249c-4283-a5fe-bfad5a34fbfa" />
+
 <img width="1919" height="908" alt="image" src="https://github.com/user-attachments/assets/de2d9ea5-f7f5-4db0-bd9a-71cee99d3316" />
 
 <img width="1919" height="908" alt="image" src="https://github.com/user-attachments/assets/a451f880-85ec-4fd8-b6de-10a168b7b0be" />
