@@ -62,4 +62,25 @@ Setiap penambahan berat akan:
 
 ---
 
-## 🗂 Struktur Folder
+## 🛠 Teknologi yang Digunakan
+
+- Flutter
+- Dart
+- Material Design
+
+---
+
+## 🎯 Tujuan Pengembangan
+
+Aplikasi ini dibuat untuk:
+- Membantu digitalisasi pencatatan ternak
+- Mengurangi pencatatan manual
+- Memudahkan monitoring perkembangan berat kambing
+- Mengimplementasikan konsep dasar pengembangan aplikasi mobile
+
+---
+## Dokumentasi
+
+
+
+
