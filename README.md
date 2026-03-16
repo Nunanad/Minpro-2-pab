@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# mygoat
-
-A new Flutter project.
-
 ## Getting Started
 
 This project is a starting point for a Flutter application.
@@ -17,6 +12,7 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 =======
+
 # 🐐 MyGoat – Aplikasi Manajemen Kambing
 
 MyGoat adalah aplikasi mobile berbasis Flutter yang dirancang untuk membantu peternak dalam mencatat dan memantau data kambing secara digital.  
@@ -151,22 +147,97 @@ Digunakan untuk mengirim dan menerima data antar halaman.
 ### 1️⃣4️⃣ setState()
 Digunakan untuk memperbarui tampilan ketika data berubah, seperti saat menambah kambing atau memperbarui berat.
 
-## Dokumentasi
+---
 
-<img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/01025d03-4d31-412f-9a23-d82f91395526" />
+# 🚀 Pengembangan Mini Project 2
 
-<img width="1919" height="909" alt="image" src="https://github.com/user-attachments/assets/8ef783ac-e5c6-45fe-b621-fc569c667867" />
+Pada Mini Project 2, aplikasi **MyGoat** dikembangkan lebih lanjut dengan menambahkan **integrasi database menggunakan Supabase** serta fitur monitoring pakan harian.
 
-<img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/835c265c-da0e-4e2a-8a30-9115014dda48" />
+Dengan integrasi ini, data yang sebelumnya hanya tersimpan secara lokal kini disimpan pada **database cloud**, sehingga lebih terstruktur dan dapat diakses kembali saat aplikasi dijalankan.
 
-<img width="1919" height="1075" alt="Screenshot 2026-02-28 234859" src="https://github.com/user-attachments/assets/baf2e509-249c-4283-a5fe-bfad5a34fbfa" />
+---
 
-<img width="1919" height="908" alt="image" src="https://github.com/user-attachments/assets/de2d9ea5-f7f5-4db0-bd9a-71cee99d3316" />
+# 🗄 Integrasi Database Supabase
 
-<img width="1919" height="908" alt="image" src="https://github.com/user-attachments/assets/a451f880-85ec-4fd8-b6de-10a168b7b0be" />
+Supabase digunakan sebagai backend database untuk menyimpan data aplikasi.
 
-<img width="1919" height="906" alt="image" src="https://github.com/user-attachments/assets/b81dfe0b-31af-4a82-a416-e17a6f78e143" />
+Beberapa operasi database yang digunakan dalam aplikasi:
+
+* **Create** → Menambahkan data kambing, pakan, dan riwayat berat
+* **Read** → Mengambil data dari database untuk ditampilkan di aplikasi
+* **Update** → Memperbarui data tertentu jika diperlukan
+* **Delete** → Menghapus data dari database
+
+Database Supabase menyimpan tiga tabel utama:
+
+### Tabel `kambing`
+
+Menyimpan data utama kambing yang dimasukkan oleh pengguna.
+
+Kolom utama:
+
+* id_kambing
+* nama
+* umur
+* jenis_kelamin
+* jenis_kambing
+* tanggal_masuk
+* berat_awal
+* created_at
+
+---
+
+### Tabel `pakan_harian`
+
+Menyimpan data jumlah pakan yang diberikan kepada kambing setiap hari.
+
+Kolom utama:
+
+* id_pakan_harian
+* tanggal
+* jumlah_kg
+* created_at
+
+Data ini digunakan untuk menampilkan **total pakan harian pada dashboard**.
+
+---
+
+### Tabel `riwayat_berat`
+
+Menyimpan riwayat perkembangan berat kambing.
+
+Kolom utama:
+
+* id_riwayat
+* id_kambing
+* tanggal
+* berat
+* created_at
+
+Data ini digunakan untuk memantau **perkembangan berat badan kambing secara berkala**.
+
+---
+
+# 📊 Fitur Tambahan pada Mini Project 2
+
+## Monitoring Pakan Harian
+
+Pengguna dapat mencatat jumlah pakan yang diberikan setiap hari.
+
+Fitur ini memungkinkan:
+
+* pencatatan jumlah pakan kambing yang ada di kandang
+* penyimpanan data pakan ke database
+* menampilkan total pakan pada dashboard
+
+---
+
+## Penyimpanan Data Supabase
+
+Dengan penggunaan Supabase, semua data aplikasi tersimpan secara online sehingga:
+
+* data lebih aman
+* data tidak hilang saat aplikasi ditutup
+* aplikasi dapat mengambil kembali data dari database saat dijalankan
 
 
-
->>>>>>> a43fa7672e51e779300a58d1155db166f9a30e31
