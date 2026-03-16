@@ -1,4 +1,5 @@
 import 'riwayat_berat.dart';
+import 'pakan_harian.dart';
 
 class Kambing {
   String id;
@@ -9,6 +10,8 @@ class Kambing {
   String jenisKambing;
   double beratAwal;
   List<RiwayatBerat> riwayatBerat;
+  List<PakanHarian> daftarPakan; 
+
 
   Kambing({
     required this.id,
@@ -19,6 +22,7 @@ class Kambing {
     required this.jenisKambing,
     required this.beratAwal,
     required this.riwayatBerat,
+     required this.daftarPakan,
   });
 
   double get beratTerakhir {

@@ -3,8 +3,13 @@ import '../models/pakan_harian.dart';
 
 class PakanPage extends StatefulWidget {
   final List<PakanHarian> daftarPakan;
+  final Function(double)? onTambahPakan;
 
-  const PakanPage({super.key, required this.daftarPakan});
+  const PakanPage({
+    super.key,
+    required this.daftarPakan,
+    this.onTambahPakan,
+  });
 
   @override
   State<PakanPage> createState() => _PakanPageState();
@@ -79,9 +84,9 @@ class _PakanPageState extends State<PakanPage> {
             },
           );
 
-          if (hasil != null) {
-            tambahPakan(hasil);
-          }
+         if (hasil != null) {
+  widget.onTambahPakan?.call(hasil);
+}
         },
         child: const Icon(Icons.add),
       ),

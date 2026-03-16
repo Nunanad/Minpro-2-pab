@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../models/kambing.dart';
-
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class FormKambingPage extends StatefulWidget {
   const FormKambingPage({super.key});
@@ -16,11 +17,10 @@ class _FormKambingPageState extends State<FormKambingPage> {
   final umurController = TextEditingController();
   final jenisController = TextEditingController();
   final beratController = TextEditingController();
+  final supabase = Supabase.instance.client;
 
-
-String? jenisKelamin;
-String? jenisKambing;
-DateTime? tanggalMasuk;
+  String? jenisKelamin;
+  DateTime? tanggalMasuk;
 
   Future<void> pilihTanggal() async {
     final picked = await showDatePicker(
@@ -37,22 +37,27 @@ DateTime? tanggalMasuk;
     }
   }
 
-  void simpanData() {
-    if (_formKey.currentState!.validate() && tanggalMasuk != null) {
-      final kambingBaru = Kambing(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        nama: namaController.text,
-        umur: int.parse(umurController.text),
-        tanggalMasuk: tanggalMasuk!,
-        jenisKelamin: jenisKelamin!,
-        jenisKambing: jenisController.text,
-        beratAwal: double.parse(beratController.text),
-        riwayatBerat: [],
-      );
+ Future<void> simpanData() async {
+  if (_formKey.currentState!.validate()) {
 
-      Navigator.pop(context, kambingBaru);
-    }
+    await supabase.from('kambing').insert({
+      'nama': namaController.text,
+      'umur': int.parse(umurController.text),
+      'tanggal_masuk': (tanggalMasuk ?? DateTime.now()).toIso8601String(),
+      'jenis_kelamin': jenisKelamin ?? "Tidak diketahui",
+      'jenis_kambing': jenisController.text,
+      'berat_awal': double.parse(beratController.text),
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Data kambing berhasil disimpan"),
+      ),
+    );
+
+    Navigator.pop(context);
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -67,21 +72,50 @@ DateTime? tanggalMasuk;
           key: _formKey,
           child: ListView(
             children: [
+
+             
               TextFormField(
                 controller: namaController,
-                decoration: const InputDecoration(labelText: "Nama Kambing"),
-                validator: (value) =>
-                    value!.isEmpty ? "Nama wajib diisi" : null,
+                decoration: const InputDecoration(
+                  labelText: "Nama Kambing",
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.pets),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Nama tidak boleh kosong";
+                  }
+                  return null;
+                },
               ),
+
               const SizedBox(height: 12),
+
+              
               TextFormField(
                 controller: umurController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: "Umur (tahun)"),
-                validator: (value) =>
-                    value!.isEmpty ? "Umur wajib diisi" : null,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly
+                ],
+                decoration: const InputDecoration(
+                  labelText: "Umur Kambing",
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.calendar_today),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Umur tidak boleh kosong";
+                  }
+                  if (int.tryParse(value) == null) {
+                    return "Masukkan angka yang valid";
+                  }
+                  return null;
+                },
               ),
+
               const SizedBox(height: 12),
+
               GestureDetector(
                 onTap: pilihTanggal,
                 child: Container(
@@ -98,9 +132,12 @@ DateTime? tanggalMasuk;
                   ),
                 ),
               ),
+
               const SizedBox(height: 12),
+
+             
               DropdownButtonFormField<String>(
-                initialValue: jenisKelamin,
+                value: jenisKelamin,
                 items: const [
                   DropdownMenuItem(
                     value: "Jantan",
@@ -113,50 +150,60 @@ DateTime? tanggalMasuk;
                 ],
                 onChanged: (value) {
                   setState(() {
-                    jenisKelamin = value!;
+                    jenisKelamin = value;
                   });
                 },
-                decoration:
-                    const InputDecoration(labelText: "Jenis Kelamin"),
+                decoration: const InputDecoration(
+                  labelText: "Jenis Kelamin",
+                  border: OutlineInputBorder(),
+                ),
               ),
+
               const SizedBox(height: 12),
               TextFormField(
                 controller: jenisController,
-                decoration:
-                    const InputDecoration(labelText: "Jenis Kambing"),
+                decoration: const InputDecoration(
+                  labelText: "Jenis Kambing",
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.category),
+                ),
                 validator: (value) =>
                     value!.isEmpty ? "Jenis kambing wajib diisi" : null,
               ),
+
               const SizedBox(height: 12),
+
+              /// BERAT
               TextFormField(
                 controller: beratController,
-                keyboardType: TextInputType.number,
-                decoration:
-                    const InputDecoration(labelText: "Berat Awal (kg)"),
-                validator: (value) =>
-                    value!.isEmpty ? "Berat wajib diisi" : null,
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))
+                ],
+                decoration: const InputDecoration(
+                  labelText: "Berat Awal (kg)",
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.monitor_weight),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Berat tidak boleh kosong";
+                  }
+                  if (double.tryParse(value) == null) {
+                    return "Masukkan angka yang valid";
+                  }
+                  return null;
+                },
               ),
+
               const SizedBox(height: 20),
-          ElevatedButton(
-  onPressed: () {
-  if (_formKey.currentState!.validate()) {
 
-    final kambing = Kambing(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
-      nama: namaController.text,
-      umur: int.parse(umurController.text),
-      tanggalMasuk: tanggalMasuk ?? DateTime.now(),
-      jenisKelamin: jenisKelamin ?? "Tidak diketahui",
-      jenisKambing: jenisKambing ?? "Tidak diketahui",
-      beratAwal: double.parse(beratController.text),
-      riwayatBerat: [],
-    );
-
-    Navigator.pop(context, kambing);
-  }
-},
-  child: const Text("Simpan"),
-),
+              /// BUTTON SIMPAN
+              ElevatedButton(
+                onPressed: simpanData,
+                child: const Text("Simpan"),
+              ),
             ],
           ),
         ),

@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
 import '../models/kambing.dart';
 import '../models/riwayat_berat.dart';
+import '../pages/pakan_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 
 class DetailKambingPage extends StatefulWidget {
   final Kambing kambing;
 
-  const DetailKambingPage({super.key, required this.kambing});
+  DetailKambingPage({super.key, required this.kambing});
 
   @override
   State<DetailKambingPage> createState() => _DetailKambingPageState();
 }
 
 class _DetailKambingPageState extends State<DetailKambingPage> {
+
+  final supabase = Supabase.instance.client;
+
+  Future<void> tambahRiwayatBerat(int idKambing, double berat) async {
+
+    await supabase.from('riwayat_berat').insert({
+      'id_kambing': idKambing,
+      'tanggal': DateTime.now().toIso8601String(),
+      'berat': berat,
+    });
+
+  }
 
   void tambahBerat(double beratBaru) {
     setState(() {
@@ -20,6 +35,7 @@ class _DetailKambingPageState extends State<DetailKambingPage> {
           tanggal: DateTime.now(),
           berat: beratBaru,
         ),
+        
       );
     });
   }
@@ -43,28 +59,53 @@ class _DetailKambingPageState extends State<DetailKambingPage> {
             Text("Jenis Kelamin: ${kambing.jenisKelamin}"),
             Text("Jenis Kambing: ${kambing.jenisKambing}"),
             Text("Tanggal Masuk: ${kambing.tanggalMasuk.toLocal()}"),
+            
 
             const SizedBox(height: 20),
 
+
+ElevatedButton.icon(
+  icon: const Icon(Icons.grass),
+  label: const Text("Monitoring Pakan"),
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PakanPage(
+          daftarPakan: kambing.daftarPakan,
+        ),
+      ),
+    );
+  },
+),
+
+const SizedBox(height: 20),
+
             const Text(
-              "Riwayat Berat",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+  "Riwayat Berat",
+  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+),
 
-            const SizedBox(height: 10),
-
-            Expanded(
-              child: ListView.builder(
-                itemCount: kambing.riwayatBerat.length,
-                itemBuilder: (context, index) {
-                  final riwayat = kambing.riwayatBerat[index];
-                  return ListTile(
-                    title: Text("${riwayat.berat} kg"),
-                    subtitle: Text(riwayat.tanggal.toLocal().toString()),
-                  );
-                },
-              ),
-            ),
+if (kambing.riwayatBerat.isEmpty)
+  const Center(
+    child: Text("Belum ada riwayat berat"),
+  )
+else
+  Expanded(
+    child: ListView.builder(
+      itemCount: kambing.riwayatBerat.length,
+      itemBuilder: (context, index) {
+        final riwayat = kambing.riwayatBerat[index];
+        return ListTile(
+          leading: const Icon(Icons.monitor_weight),
+          title: Text("${riwayat.berat} kg"),
+          subtitle: Text(
+            "${riwayat.tanggal.day}-${riwayat.tanggal.month}-${riwayat.tanggal.year}",
+          ),
+        );
+      },
+    ),
+  ),
           ],
         ),
       ),
@@ -106,9 +147,16 @@ class _DetailKambingPageState extends State<DetailKambingPage> {
             },
           );
 
-          if (hasil != null) {
-            tambahBerat(hasil);
-          }
+         if (hasil != null) {
+
+  tambahBerat(hasil);
+
+  await tambahRiwayatBerat(
+    int.parse(widget.kambing.id),
+    hasil,
+  );
+
+}
         },
         child: const Icon(Icons.add),
       ),
