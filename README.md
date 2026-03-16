@@ -240,4 +240,21 @@ Dengan penggunaan Supabase, semua data aplikasi tersimpan secara online sehingga
 * data tidak hilang saat aplikasi ditutup
 * aplikasi dapat mengambil kembali data dari database saat dijalankan
 
+# Dokumentasi Minpro 2
+
+<img width="1916" height="1079" alt="image" src="https://github.com/user-attachments/assets/4b371901-2e89-4afe-a0a2-2781b9ef6457" />
+
+<img width="1913" height="1021" alt="image" src="https://github.com/user-attachments/assets/fbdce398-e3ba-4af6-9dbc-7e1250a3ce37" />
+
+<img width="1919" height="1013" alt="image" src="https://github.com/user-attachments/assets/277e9775-8571-462f-89cf-bc08068c6703" />
+
+<img width="1919" height="1026" alt="image" src="https://github.com/user-attachments/assets/e2942ce9-1b36-4238-97e7-9077542332b1" />
+
+
+
+
+
+
+
+
 
