@@ -7,66 +7,94 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFFE8F5E9),
-              Color(0xFFC8E6C9),
-              Color(0xFF81C784),
+              Color(0xFF8FBF8F),
+              Color(0xFFE6F2E6),
             ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
-        child: SafeArea(
+
+        child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
+
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Spacer(),
-                const Text(
-                  'MyGoat',
-                  style: TextStyle(
-                    fontSize: 42,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1B5E20),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  'Sistem Monitoring Peternakan Kambing Skala Kecil',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFF2E7D32),
-                  ),
-                ),
+
+
                 const SizedBox(height: 20),
+
                 const Text(
-                  'Kelola data kambing, pantau perkembangan berat badan, dan catat pakan harian dengan lebih terstruktur dan efisien.',
+                  "MyGoat",
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF2F5D2F),
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                const Text(
+                  "Sistem Monitoring Peternakan Kambing",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black54,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+
+                const SizedBox(height: 5),
+
+                const Text(
+                  "Kelola data kambing, pantau perkembangan berat badan, dan catat pakan harian dengan lebih terstruktur dan efisien.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
-                    color: Colors.black87,
+                    color: Colors.black54,
                   ),
                 ),
-                const Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const DashboardPage(),
+
+                const SizedBox(height: 40),
+
+                SizedBox(
+                  width: 220,
+                  height: 50,
+
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                    );
-                  },
-                  child: const Text('Mulai Sekarang'),
+                      elevation: 4,
+                    ),
+
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DashboardPage(),
+                        ),
+                      );
+                    },
+
+                    child: const Text(
+                      "Mulai Sekarang",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 60),
               ],
             ),
           ),

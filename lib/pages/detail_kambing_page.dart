@@ -22,7 +22,7 @@ class _DetailKambingPageState extends State<DetailKambingPage> {
 
     await supabase.from('riwayat_berat').insert({
       'id_kambing': idKambing,
-      'tanggal': DateTime.now().toIso8601String(),
+      'tanggal': DateTime.now().toString().split(' ')[0],
       'berat': berat,
     });
 
